@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@Scripts.Render("~/Scripts/Kendo/KendoComboBox.js")
+
+<h2><strong>Demo View</strong></h2>
+
+<h3>Kendo Combo Box 1 (Static Data)</h3>
+<div style="width:30%">
+    <input id="cmbEmployeeStatic" />
+</div>
+
+<br />
+<h3>Kendo Combo Box 2 (Dynamic Data)</h3>
+<div style="width:30%">
+    <input id="cmbEmployeeDynamic1" />
+</div>
+
+<br />
+<h3>Kendo Combo Box 3 (Dynamic Data)</h3>
+<div style="width:30%">
+    @(Html.Kendo().ComboBox()
+    .Name("cmbEmployeeDynamic2")
+    .DataTextField("Name")
+    .DataValueField("Id")
+    .DataSource(source =>
+    {
+        source.Read(read =>
+        {
+            read.Action("GetEmployeeData", "Demo");
+        })
+        .ServerFiltering(true);
+    })
+    .SelectedIndex(0)
+)
+</div>
